@@ -1,0 +1,119 @@
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id String @id @default(uuid())
+  email String @unique
+  status UserStatus @default(ACTIVE)  
+  needPasswordChange Boolean @default(false)
+  password String
+  role UserRole
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  admin Admin?
+  bookings Booking[]
+  profile UserProfile? 
+  normalUser normalUser?
+  flats Flat[]
+  @@map("users")
+}
+
+
+model Admin {
+  id String @id @default(uuid())
+  name String
+  username String @unique
+  email String @unique
+  profilePhoto String?
+  contactNumber String?
+  isDeleted Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user Users @relation(references: [email], fields: [email])
+@@map("admins")
+}
+model normalUser {
+  id String @id @default(uuid())
+  name String
+  username String @unique
+  email String @unique
+  profilePhoto String?
+  contactNumber String?
+  isDeleted Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user Users @relation(references: [email], fields: [email])
+@@map("user")
+}
+
+
+model Flat {
+  id              String      @id @default(uuid())
+  squareFeet      Int
+  totalBedrooms   Int
+  totalRooms      Int
+  utilitiesDescription String
+  location        String
+  description     String
+  rent            Int
+  availability    Boolean @default(true)
+  advanceAmount   Int
+  amenities       String
+  flatPhoto       String[] @default([])
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  userId          String
+  user            Users @relation(fields: [userId], references: [id])
+  bookings Booking[]
+  @@map("flats")
+}
+
+model Booking {
+  id String @id @default(uuid())
+  flatId String
+  flat Flat @relation(fields: [flatId], references: [id])
+  userId String
+  user Users @relation(fields: [userId], references: [id])
+  status Status @default(PENDING)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  @@map("bookings")
+}
+
+model UserProfile {
+  id String @id @default(uuid())
+  bio String?
+  user Users @relation(fields: [id], references: [id])
+  profession String?
+  address String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@map("user_profiles")
+}
+
+enum Status {
+  PENDING
+  BOOKED
+  REJECTED
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  USER
+
+}
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+  DELETED
+}
