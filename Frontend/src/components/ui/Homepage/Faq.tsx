@@ -1,6 +1,7 @@
 import HomeSectionTitle from "@/components/shared/SectionTitle/HomeSectionTitle";
+import Image from "next/image";
 import { useState } from "react";
-
+import faqImage from "../../../assests/Home/Faq.png";
 function Faq() {
   const FaqData = [
     {
@@ -67,7 +68,9 @@ function Faq() {
                 className="w-full flex justify-between items-center p-4 text-left"
                 onClick={() => handleToggle(index)}
               >
-                <span className="font-medium">{item.question}</span>
+                <span className="font-medium text-sm sm:text-lg">
+                  {item.question}
+                </span>
                 <span
                   className={`transform transition-transform duration-300 ${
                     expandedIndex === index ? "rotate-180" : ""
@@ -91,12 +94,14 @@ function Faq() {
 
         {/* main frequently div image section area */}
         <div>
-          {/* <img
-          draggable={false}
-          className="mx-auto xl:w-full xl:h-full w-full sm:w-[60%] md:w-[65%] md:h-[90%] lg:w-[70%]  "
-          src={faqpic}
-          alt="FAQ Img"
-        /> */}
+          <Image
+            draggable={false}
+            height={400}
+            width={400}
+            className="mx-auto xl:w-full xl:h-full w-full sm:w-[60%] md:w-[65%] md:h-[90%] lg:w-[70%]  "
+            src={faqImage}
+            alt="FAQ Img"
+          />
         </div>
         {/* main frequently div image section area */}
       </section>

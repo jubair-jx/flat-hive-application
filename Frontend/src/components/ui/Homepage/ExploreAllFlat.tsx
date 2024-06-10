@@ -33,10 +33,7 @@ function ExploreAllFlat() {
         >
           {data?.slice(0, 6)?.map((item: any) => (
             <div key={item.id} className="relative mx-auto w-full">
-              <a
-                href="#"
-                className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-1 w-full"
-              >
+              <div className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-1 w-full">
                 <div className="shadow-md border border-gray-300 border-dashed p-4 rounded-lg bg-white">
                   <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
                     <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
@@ -174,7 +171,7 @@ function ExploreAllFlat() {
                     </div>
                   </div>
                 </div>
-              </a>
+              </div>
             </div>
           ))}
         </div>
