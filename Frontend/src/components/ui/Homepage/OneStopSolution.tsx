@@ -31,7 +31,7 @@ export default function OneStopSolution() {
                 />
               </svg>
             </span>
-            <p className="sm:text-2xl text-xl font-bold text-dark-grey-900 font-exo">
+            <p className="sm:text-2xl text-xl font-semibold text-dark-grey-900 font-Kanit">
               Find Your Dream Home
             </p>
             <p className="text-sm font-poppins text-dark-grey-600">
@@ -64,7 +64,7 @@ export default function OneStopSolution() {
                 />
               </svg>
             </span>
-            <p className="sm:text-2xl text-xl font-bold text-dark-grey-900 font-exo">
+            <p className="sm:text-2xl text-xl font-semibold text-dark-grey-900 font-Kanit">
               List Your Property for Sale
             </p>
             <p className="text-sm font-poppins text-dark-grey-600">
@@ -97,7 +97,7 @@ export default function OneStopSolution() {
                 />
               </svg>
             </span>
-            <p className="sm:text-2xl text-xl font-bold text-dark-grey-900 font-exo">
+            <p className="sm:text-2xl text-xl font-semibold text-dark-grey-900 font-Kanit">
               Find Rental Flats
             </p>
             <p className="text-sm font-poppins text-dark-grey-600">

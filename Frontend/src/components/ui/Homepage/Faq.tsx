@@ -68,7 +68,7 @@ function Faq() {
                 className="w-full flex justify-between items-center p-4 text-left"
                 onClick={() => handleToggle(index)}
               >
-                <span className="font-medium text-sm sm:text-lg">
+                <span className="font-normal text-sm sm:text-lg font-Kanit">
                   {item.question}
                 </span>
                 <span
