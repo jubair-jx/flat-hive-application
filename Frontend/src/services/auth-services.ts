@@ -15,12 +15,16 @@ export const getUserInfo = () => {
   const authToken = getLocalStorageUserInfo(authKey);
   if (authToken) {
     const decodedData: any = decodedToken(authToken);
-    return {
-      ...decodedData,
-      role: decodedData?.role.toLowerCase(),
-    };
+    if (decodedData) {
+      return {
+        ...decodedData,
+        role: decodedData?.role.toLowerCase(),
+      };
+    }
   }
+  return null; // Return null if no valid token or decoding failed
 };
+
 
 export const isLoggedIn = () => {
   const authToken = getLocalStorageUserInfo(authKey);

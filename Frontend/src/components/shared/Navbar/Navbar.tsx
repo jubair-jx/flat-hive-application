@@ -13,6 +13,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+
 const NavBar = () => {
   const AuthButton = dynamic(
     () => import("@/components/ui/Homepage/AuthButton"),
@@ -41,13 +42,7 @@ const NavBar = () => {
   const navData = [
     { id: 0, name: "Home", link: "/", icon: HomeIcon },
     { id: 1, name: "About Us", link: "/about", icon: InfoIcon },
-
-    {
-      id: 3,
-      name: "Flats",
-      link: "/all-flats",
-      icon: ApartmentIcon,
-    },
+    { id: 3, name: "Flats", link: "/all-flats", icon: ApartmentIcon },
     {
       id: 4,
       name: "Contact Us",
@@ -73,25 +68,24 @@ const NavBar = () => {
   const [open, setOpen] = useState(false);
 
   if (!isClient) {
-    // Render a fallback while waiting for client-side hydration
-    return null;
+    return null; // Render a fallback while waiting for client-side hydration
   }
+
   return (
     <>
-      <header className=" sticky top-0 left-0 right-0 z-50 transition-all duration-300 ease-linear bg-white container mx-auto lg:px-4 px-2 ">
-        <div className="  mx-auto px-4 sm:px-0">
+      <header className="sticky top-0 left-0 right-0 z-50 transition-all duration-300 ease-linear bg-white container mx-auto lg:px-4 px-2">
+        <div className="mx-auto px-4 sm:px-0">
           <div className="flex justify-between items-center border-b-2 border-gray-100 py-4 lg:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1 active:scale-110 duration-300">
               <Link href="/">
-                <h1 className=" font-bold text-3xl font-Freeman">
-                  Flat<span className=" text-[#F47C21]">Hive</span>
+                <h1 className="font-bold text-3xl font-Freeman">
+                  Flat<span className="text-[#F47C21]">Hive</span>
                 </h1>
               </Link>
             </div>
-            <div onClick={() => setOpen(!open)} className=" lg:hidden">
-              <button className="bg-white rounded-md inline-flex items-center justify-center text-gray-700 hover:text-gray-500  ">
+            <div onClick={() => setOpen(!open)} className="lg:hidden">
+              <button className="bg-white rounded-md inline-flex items-center justify-center text-gray-700 hover:text-gray-500">
                 <span className="sr-only">Open menu</span>
-                {/* Heroicon name: outline/menu */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -135,8 +129,8 @@ const NavBar = () => {
             <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between active:scale-110 duration-300">
                 <Link href="/">
-                  <h1 className=" font-bold text-2xl font-Freeman">
-                    Flat<span className=" text-[#F47C21]">Hive</span>
+                  <h1 className="font-bold text-2xl font-Freeman">
+                    Flat<span className="text-[#F47C21]">Hive</span>
                   </h1>
                 </Link>
                 <div className="">
@@ -146,7 +140,6 @@ const NavBar = () => {
                     onClick={() => setOpen(!open)}
                   >
                     <span className="sr-only">Close menu</span>
-
                     <svg
                       className="h-6 w-6"
                       xmlns="http://www.w3.org/2000/svg"
@@ -173,11 +166,7 @@ const NavBar = () => {
                       key={data.id}
                       href={data.link}
                     >
-                      <ListItemIcon
-                        sx={{
-                          color: "#fb8c00",
-                        }}
-                      >
+                      <ListItemIcon sx={{ color: "#fb8c00" }}>
                         {data.icon && <data.icon />}
                       </ListItemIcon>
                       <span className="ml-3 text-base font-medium text-gray-900">
@@ -206,9 +195,8 @@ const NavBar = () => {
                     Sign in
                   </a>
                 )}
-
                 <p className="mt-6 text-center text-base font-medium text-gray-500">
-                  {"Dont't have an account?"}
+                  {"Don't have an account?"}
                   <span className="text-orange-600">Sign up</span>
                 </p>
               </div>
@@ -216,9 +204,9 @@ const NavBar = () => {
           </div>
         </div>
       </header>
-
       <LoginModal open={openModal} setModalOpen={setModalOpen} />
     </>
   );
 };
+
 export default NavBar;

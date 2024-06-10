@@ -2,6 +2,7 @@
 import Testimonial from "@/components/Pages/Testimonial/Testimonial";
 import ContactSection from "@/components/ui/Homepage/ContactSection";
 import ExploreAllFlat from "@/components/ui/Homepage/ExploreAllFlat";
+import Faq from "@/components/ui/Homepage/Faq";
 import HeroSection from "@/components/ui/Homepage/HeroSection";
 import OneStopSolution from "@/components/ui/Homepage/OneStopSolution";
 import SearchShowCardSection from "@/components/ui/Homepage/SearchShowCardSection";
@@ -22,6 +23,7 @@ export default function HomePage() {
       <ExploreAllFlat />
       <OneStopSolution />
       <Testimonial />
+      <Faq />
       <ContactSection />
     </main>
   );
