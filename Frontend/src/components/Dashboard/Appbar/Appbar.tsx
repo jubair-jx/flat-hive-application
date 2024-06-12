@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
+import React, { useEffect } from "react";
 import AccountMenu from "../AccountMenu/AccountMenu";
 
 type Tprops = {
@@ -23,9 +23,21 @@ function AppTopBar({
   mobileOpen,
   isClosing,
   setMobileOpen,
-  setIsClosing,
 }: Tprops) {
-  const { data, isLoading } = useGetMyProfileQuery({});
+  const { data, isLoading, error, refetch } = useGetMyProfileQuery({});
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Ensure the code runs only on the client side
+      refetch();
+    }
+  }, [refetch]);
+
+  useEffect(() => {
+    if (error) {
+      console.error("Failed to fetch profile data:", error);
+    }
+  }, [error]);
 
   const handleDrawerToggle = () => {
     if (!isClosing) {
@@ -77,10 +89,14 @@ function AppTopBar({
               <span className=" text-[#F47C21]">FlatHive...</span>
             </h1>
           </Box>
-          <Stack direction="row" gap={3}>
-            <Avatar alt={data?.name} src={data?.profilePhoto} />
-            <AccountMenu />
-          </Stack>
+          {!isLoading ? (
+            <Stack direction="row" gap={3}>
+              <Avatar alt={data?.name} src={data?.profilePhoto} />
+              <AccountMenu />
+            </Stack>
+          ) : (
+            <></>
+          )}
         </Box>
       </Toolbar>
     </AppBar>

@@ -37,6 +37,10 @@ function PostFlatPage() {
     amenities: "",
   };
   const handleOnSubmit = async (values: FieldValues) => {
+    if (imageUrls.length < 3) {
+      toast.warning("Please select at least three images.");
+      return;
+    }
     values.totalBedrooms = Number(values.totalBedrooms);
     values.squareFeet = Number(values.squareFeet);
     values.totalRooms = Number(values.totalRooms);
@@ -48,9 +52,9 @@ function PostFlatPage() {
       ...values,
       flatPhoto: imageUrls,
     };
-    const res = await createFlat(payload).unwrap();
 
     try {
+      const res = await createFlat(payload).unwrap();
       if (res?.id) {
         toast.success("Your flat is created successfully");
       }
