@@ -28,7 +28,7 @@ function ProfileUpdateModal({ open, setOpen, id, data, refetch }: TProps) {
   const submitHandler = async (values: FieldValues) => {
     try {
       const res = await updateProfile(values).unwrap();
-      console.log(res);
+
       await refetch();
       if (res?.id) {
         toast.success("Profile has been updated successfully!!!");

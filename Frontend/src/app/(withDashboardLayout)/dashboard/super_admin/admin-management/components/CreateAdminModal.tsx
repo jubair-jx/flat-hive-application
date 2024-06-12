@@ -19,7 +19,7 @@ function CreateAdminModal({ ModalOpen, setModalOpen }: TProps) {
   const [createAdmin] = useCreateAdminMutation();
   const handleFormSubmit = async (values: FieldValues) => {
     const res = await createAdmin(values).unwrap();
-    console.log(res);
+
     try {
       if (res?.id) {
         toast.success("Boss!!! Admin is created Successfully..");

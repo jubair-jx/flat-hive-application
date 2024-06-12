@@ -1,5 +1,5 @@
 import { userLogin } from "@/services/action/loginUser";
-import { storeUserInfo } from "@/services/auth-services";
+import { getUserInfo, storeUserInfo } from "@/services/auth-services";
 import { Grid } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -14,9 +14,10 @@ type TProps = {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 function LoginModal({ open, setModalOpen }: TProps) {
+  const userInfo = getUserInfo();
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
   const router = useRouter();
-  const [error, setError] = useState("");
+
   const handleRegisterModalOpen = () => {
     setRegisterModalOpen(true);
     setModalOpen(false);
@@ -33,12 +34,12 @@ function LoginModal({ open, setModalOpen }: TProps) {
     try {
       if (res?.data?.accessToken) {
         setModalOpen(false);
-
+        await userLogin(values);
         toast.success(res?.message);
         storeUserInfo({ accessToken: res?.data?.accessToken });
-        router.push("/");
+        router.push(`/dashboard/${userInfo?.role}`);
         await userLogin(values);
-        router.push("/");
+        router.push(`/dashboard/${userInfo?.role}`);
       } else {
         toast.error(res?.message);
       }

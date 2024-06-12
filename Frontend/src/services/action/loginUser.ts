@@ -1,9 +1,11 @@
 // "use server";
 
 import { FieldValues } from "react-hook-form";
+import { getUserInfo } from "../auth-services";
 import setAccessToken from "./setAccessToken";
 
 export const userLogin = async (data: FieldValues) => {
+  const existUser = getUserInfo();
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/auth/login`,
     {
@@ -20,7 +22,7 @@ export const userLogin = async (data: FieldValues) => {
 
   if (userInfo?.data?.accessToken) {
     setAccessToken(userInfo?.data?.accessToken, {
-      redirect: `/`,
+      redirect: `/dashboard/${existUser?.role}`,
     });
   }
   return userInfo;

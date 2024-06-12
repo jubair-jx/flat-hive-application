@@ -45,7 +45,6 @@ function PostFlatPage() {
     const res = await createFlat(payload).unwrap();
 
     try {
-      console.log(res);
       if (res?.id) {
         toast.success("Your flat is created successfully");
       }

@@ -12,7 +12,6 @@ export const profileApi = baseApi.injectEndpoints({
     }),
     updateProfile: build.mutation({
       query: (data: Record<string, any>) => {
-        console.log(data);
         return {
           url: `/profile/update-info`,
           method: "PUT",

@@ -8,7 +8,7 @@ import { toast } from "sonner";
 
 function UserManagementPage() {
   const { data, isLoading, refetch } = useGetAllUsersQuery({});
-  console.log(data);
+
   const [updateNormalUserInfo] = useUpdateNormalUserInfoMutation();
 
   const handleOnUpdate = async (
