@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: "Choose your own desired flat",
 };
 
+// export const dynamic = "force dynamic";
+
 export default function RootLayout({
   children,
 }: Readonly<{

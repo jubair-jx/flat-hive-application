@@ -8,7 +8,7 @@ import Link from "next/link";
 function ProfileNav({ responsive }: { responsive: boolean }) {
   const userInfo = getUserInfo();
   const { data, isLoading } = useGetMyProfileQuery({});
-  console.log(userInfo);
+
   return (
     <>
       {userInfo?.role && (

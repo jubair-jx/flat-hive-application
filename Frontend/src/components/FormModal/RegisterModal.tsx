@@ -2,7 +2,7 @@ import { useCreateUserMutation } from "@/redux/api/usersApi";
 import { userLogin } from "@/services/action/loginUser";
 import { storeUserInfo } from "@/services/auth-services";
 import { Grid } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import React from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -42,14 +42,14 @@ function RegisterModal({
         if (result?.data?.accessToken) {
           storeUserInfo({ accessToken: result?.data?.accessToken });
           setRegisterModalOpen(false);
-          router.push("/");
+          // router.push("/");
+          redirect("/");
         }
       } else {
-        toast.error(res?.message)
+        toast.error(res?.message);
       }
     } catch (err: any) {
-      console.log(err);
-      toast.error("User not created");
+      // console.log(err);
     }
   };
   return (

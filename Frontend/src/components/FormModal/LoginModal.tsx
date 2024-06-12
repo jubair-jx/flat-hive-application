@@ -1,7 +1,7 @@
 import { userLogin } from "@/services/action/loginUser";
 import { getUserInfo, storeUserInfo } from "@/services/auth-services";
 import { Grid } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
@@ -37,14 +37,13 @@ function LoginModal({ open, setModalOpen }: TProps) {
         await userLogin(values);
         toast.success(res?.message);
         storeUserInfo({ accessToken: res?.data?.accessToken });
-        router.push(`/dashboard/${userInfo?.role}`);
-        await userLogin(values);
-        router.push(`/dashboard/${userInfo?.role}`);
+        // router.push("/");
+        redirect("/");
       } else {
         toast.error(res?.message);
       }
     } catch (err: any) {
-      toast.error(res?.message);
+      // toast.error(res?.message);
     }
   };
 
