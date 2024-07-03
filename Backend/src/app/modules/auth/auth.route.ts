@@ -9,7 +9,7 @@ authRoutes.post("/login", authControllers.loginUser);
 authRoutes.post("/refresh-token", authControllers.refreshToken);
 authRoutes.post(
   "/change-password",
-  auth(UserRole.ADMIN, UserRole.USER, UserRole.SUPER_ADMIN),
+  auth(UserRole.ADMIN, UserRole.USER),
   authControllers.changePassword
 );
 

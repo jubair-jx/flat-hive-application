@@ -1,36 +1,78 @@
-import type { Config } from "tailwindcss";
+const defaultTheme = require("tailwindcss/defaultTheme");
 
-const config: Config = {
+const svgToDataUri = require("mini-svg-data-uri");
+
+const colors = require("tailwindcss/colors");
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+
+    // Or if using `src` directory:
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
+      backgroundImage: {
+        "hero-grid": "url('/assets/Home/hero-grid.svg')",
+        // Add more custom backgrounds as needed
+      },
+      colors: {
+        primary: "#0d47a1",
+        secondary: "#ff9800",
+        accent: "#e91e63",
+        background: "#f5f5f5",
+        foreground: "#212121",
+      },
       fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
+        Rubik: ["Rubik", "sans-serif"],
+        Raleway: ["Raleway", "sans-serif"],
+        Poppins: ["Poppins", "sans-serif"],
         Kanit: ["Kanit", "sans-serif"],
-        Freeman: ["Freeman", "sans-serif"],
-        exo: ["Exo 2", "sans-serif"],
+      },
+      fontSize: {
+        h1: ["3.25rem", { lineHeight: "2.5rem" }], // 36px
+        h2: ["1.875rem", { lineHeight: "2.25rem" }], // 30px
+        h3: ["1.5rem", { lineHeight: "2rem" }], // 24px
+        p: ["1rem", { lineHeight: "1.5rem" }], // 16px
+        button: ["1rem", { lineHeight: "1.5rem", fontWeight: "bold" }], // 16px
+        a: ["1rem", { lineHeight: "1.5rem" }], // 16px
+        span: ["0.875rem", { lineHeight: "1.25rem" }], // 14px
       },
       animation: {
+        spotlight: "spotlight 2s ease .75s 1 forwards",
         text: "text 4s ease infinite",
-        fadeIn: "fadeIn 3s ease infinite",
-        slideInLeft: "slideInLeft 3s linear infinite",
-        scaleIn: "scaleIn 1s ease infinite",
-        rotateIn: "rotateIn 1s ease infinite",
-        bounceIn: "bounceIn 4s ease infinite",
-        pulse: "pulse 4s ease infinite",
-        spin: "spin 12s linear infinite",
-        flash: "flash 1s ease infinite",
-        wobble: "wobble 1s ease infinite",
-        hinge: "hinge 1s ease infinite",
-        slideInDown: "slideInDown .5s ease-in-out",
-        ping: "ping 1s cubic-bezier(0, 0, 0.2, 1) infinite",
-        bounce: "bounce 1s infinite",
+        shimmer: "shimmer 2s linear infinite",
+        "meteor-effect": "meteor 5s linear infinite",
+        scroll:
+          "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
       },
       keyframes: {
+        spotlight: {
+          "0%": {
+            opacity: 0,
+            transform: "translate(-72%, -62%) scale(0.5)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translate(-50%,-40%) scale(1)",
+          },
+        },
+        shimmer: {
+          from: {
+            backgroundPosition: "0 0",
+          },
+          to: {
+            backgroundPosition: "-200% 0",
+          },
+        },
         text: {
           "0%, 100%": {
             "background-size": "200% 200%",
@@ -41,88 +83,57 @@ const config: Config = {
             "background-position": "right center",
           },
         },
-        fadeIn: {
-          "0%": {
-            width: "0%",
-          },
+        meteor: {
+          "0%": { transform: "rotate(215deg) translateX(0)", opacity: "1" },
+          "70%": { opacity: "1" },
           "100%": {
-            width: "60%",
-          },
-        },
-        slideInLeft: {
-          "0%": {
-            transform: "translateX(0)",
-          },
-          "100%": {
-            transform: "translateX(40%)",
-          },
-        },
-        slideInDown: {
-          "0%": {
-            transform: "translateY(0)",
-          },
-          "50%": {
-            transform: "translateY(8px)",
-          },
-          "100%": {
-            transform: "translateY(0)",
-          },
-        },
-        spin: {
-          from: {
-            transform: "rotate(0deg)",
-          },
-          to: {
-            transform: "rotate(360deg)",
-          },
-        },
-        ping: {
-          "75%, 100%": {
-            transform: "scale(2)",
+            transform: "rotate(215deg) translateX(-500px)",
             opacity: "0",
           },
         },
-        pulse: {
-          "0%, 100%": {
-            opacity: "1",
-          },
-          "50%": {
-            opacity: "0.5",
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 0.5rem))",
           },
         },
-        bounce: {
-          "0%, 100%": {
-            transform: "translateY(-25%)",
-            "animation-timing-function": "cubic-bezier(0.8, 0, 1, 1)",
-          },
-          "50%": {
-            transform: "translateY(0)",
-            "animation-timing-function": "cubic-bezier(0, 0, 0.2, 1)",
-          },
-        },
-      },
-      boxShadow: {
-        default: "0px 8px 13px -3px rgba(0, 0, 0, 0.07)",
-        card: "0px 1px 3px rgba(0, 0, 0, 0.12)",
-        "card-2": "0px 1px 2px rgba(0, 0, 0, 0.05)",
-        switcher:
-          "0px 2px 4px rgba(0, 0, 0, 0.2), inset 0px 2px 2px #FFFFFF, inset 0px -1px 1px rgba(0, 0, 0, 0.1)",
-        "switch-1": "0px 0px 5px rgba(0, 0, 0, 0.15)",
-        1: "0px 1px 3px rgba(0, 0, 0, 0.08)",
-        2: "0px 1px 4px rgba(0, 0, 0, 0.12)",
-        3: "0px 1px 5px rgba(0, 0, 0, 0.14)",
-        4: "0px 4px 10px rgba(0, 0, 0, 0.12)",
-        5: "0px 1px 1px rgba(0, 0, 0, 0.15)",
-        6: "0px 3px 15px rgba(0, 0, 0, 0.1)",
-        7: "-5px 0 0 #313D4A, 5px 0 0 #313D4A",
-        8: "1px 0 0 #313D4A, -1px 0 0 #313D4A, 0 1px 0 #313D4A, 0 -1px 0 #313D4A, 0 3px 13px rgb(0 0 0 / 8%)",
-      },
-      dropShadow: {
-        1: "0px 1px 0px #E2E8F0",
-        2: "0px 1px 4px rgba(0, 0, 0, 0.12)",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    addVariablesForColors,
+    function ({ matchUtilities, theme }: any) {
+      matchUtilities(
+        {
+          "bg-grid": (value: any) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+            )}")`,
+          }),
+          "bg-grid-small": (value: any) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="8" height="8" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+            )}")`,
+          }),
+          "bg-dot": (value: any) => ({
+            backgroundImage: `url("${svgToDataUri(
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="1.6257413380501518"></circle></svg>`
+            )}")`,
+          }),
+        },
+        { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
+      );
+    },
+  ],
 };
-export default config;
+
+// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}

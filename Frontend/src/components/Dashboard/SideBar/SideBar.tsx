@@ -1,20 +1,15 @@
 import { UserRole } from "@/types";
 
-import { getUserInfo } from "@/services/auth-services";
 import { GenerateDrawerItems } from "@/utils/DrawerItmes";
 import { Box, Divider, Stack } from "@mui/material";
 import List from "@mui/material/List";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SideBarItems from "./SideBarItems";
 
 function SideBar() {
   const [userRole, setUserRole] = useState("");
-  const { role } = getUserInfo();
 
-  useEffect(() => {
-    setUserRole(role);
-  }, [role]);
   return (
     <Box>
       <Stack
@@ -32,8 +27,12 @@ function SideBar() {
       >
         {/* <Image src={assets.svgs.logo} width={40} height={40} alt="logo" />
          */}
-        <h1 className=" font-bold text-3xl font-poppins">
-          Flat<span className=" text-[#F47C21]">Hive</span>
+        <h1 className=" text-center mx-auto font-bold text-2xl font-poppins">
+          Portfolio
+          <span className=" text-[#F47C21]">
+            {" "}
+            <br /> Management
+          </span>
         </h1>
       </Stack>
       <Divider />

@@ -42,58 +42,6 @@ const getAllUsers = catchAsync(async (req, res) => {
     data: result.data,
   });
 });
-const getAllNormalUsers = catchAsync(async (req, res) => {
-  const result = await userServices.getAllNormalUsersFromDB();
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: "Users data has been retrievd successfully",
-    // meta: result.meta,
-    // data: result.data,
-    data: result,
-  });
-});
-
-const updateNormalUserData = catchAsync(async (req, res, next) => {
-  const { id } = req.params;
-
-  const result = await userServices.updateNormaUserInfoDataById(id, req.body);
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: "Normal User data Info has been updated successfully",
-    data: result,
-  });
-});
-
-const getUserById = catchAsync(async (req, res) => {
-  const { id } = req.params;
-
-  const result = await userServices.getUserByIdFromDB(id);
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: "User data has been retrievd successfully",
-
-    data: result,
-  });
-});
-
-const getNormalUsers = catchAsync(async (req, res) => {
-  const result = await userServices.getAllNormalUsersFromDB();
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: "Normal Users data has been retrievd successfully",
-    // meta: result.meta,
-    // data: result.data,
-    data: result,
-  });
-});
 
 const getAllAdminFromDB = catchAsync(async (req, res) => {
   const result = await userServices.getAllAdminFromDB();
@@ -108,27 +56,11 @@ const getAllAdminFromDB = catchAsync(async (req, res) => {
   });
 });
 
-const updateAdminData = catchAsync(async (req, res, next) => {
-  const { id } = req.params;
-
-  const result = await userServices.updateAdminInfoDataById(id, req.body);
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: "Admin data Info has been updated successfully",
-    data: result,
-  });
-});
-
 export const userControllers = {
   createUser,
   createAdmin,
-  getAllNormalUsers,
+
   getAllUsers,
-  getUserById,
-  getNormalUsers,
-  updateNormalUserData,
-  updateAdminData,
+
   getAllAdminFromDB,
 };

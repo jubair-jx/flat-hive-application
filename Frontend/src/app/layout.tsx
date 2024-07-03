@@ -1,15 +1,14 @@
+import ScrollToTop from "@/components/ui/Button/ScrollIcon";
+import CustomCursor from "@/components/ui/Cursor/CustomCursor";
+import ClientLoader from "@/components/ui/Loading/ClientLoading";
 import Providers from "@/lib/Providers/Providers";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import type { Metadata } from "next";
-import { Toaster } from "sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Flat Hive",
-  description: "Choose your own desired flat",
+  title: "Mohammad Jubair - Official Site",
+  description: "Mohammad Jubair official site",
 };
-
-// export const dynamic = "force dynamic";
 
 export default function RootLayout({
   children,
@@ -19,10 +18,13 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en">
+        <head>
+          <link rel="icon" href="/favicon.svg" type="image/jpeg" />
+        </head>
         <body>
-          {" "}
-          <Toaster richColors />
-          <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+          <CustomCursor />
+          <ClientLoader>{children}</ClientLoader>
+          <ScrollToTop />
         </body>
       </html>
     </Providers>

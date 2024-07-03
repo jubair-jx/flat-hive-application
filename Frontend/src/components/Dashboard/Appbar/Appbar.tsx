@@ -6,7 +6,6 @@ import { AppBar, Avatar, Stack } from "@mui/material";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import React, { useEffect } from "react";
 import AccountMenu from "../AccountMenu/AccountMenu";
 
@@ -75,20 +74,6 @@ function AppTopBar({
             width: "100%",
           }}
         >
-          <Box>
-            <Typography
-              variant="body2"
-              noWrap
-              component="h5"
-              sx={{ color: "rgba(11, 17, 52, 0.6)", fontFamily: "poppins" }}
-            >
-              Hi, {isLoading ? "Loading..." : data?.name},
-            </Typography>
-            <h1 className=" text-lg font-Kanit text-black">
-              Hey!!! Welcome to{" "}
-              <span className=" text-[#F47C21]">FlatHive...</span>
-            </h1>
-          </Box>
           {!isLoading ? (
             <Stack direction="row" gap={3}>
               <Avatar alt={data?.name} src={data?.profilePhoto} />

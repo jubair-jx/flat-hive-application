@@ -1,0 +1,13 @@
+.vip-amazing-custom-cursor {
+  position: fixed;
+  width: 50px; /* Adjust size as needed */
+  height: 50px; /* Adjust size as needed */
+  border-radius: 50%;
+  background-color: #dddddd;
+  border: 2px solid white;
+  z-index: 9999;
+  mix-blend-mode: difference; /* Ensures cursor is visible on any background */
+  pointer-events: none; /* Prevents cursor from interfering with elements */
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease; /* Optional: Add transition effects */
+}

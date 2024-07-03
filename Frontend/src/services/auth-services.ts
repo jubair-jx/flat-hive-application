@@ -22,9 +22,8 @@ export const getUserInfo = () => {
       };
     }
   }
-  return null; // Return null if no valid token or decoding failed
+  return null;
 };
-
 
 export const isLoggedIn = () => {
   const authToken = getLocalStorageUserInfo(authKey);

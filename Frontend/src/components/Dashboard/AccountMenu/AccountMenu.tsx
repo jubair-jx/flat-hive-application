@@ -1,15 +1,3 @@
-import { logoutUser } from "@/services/action/logOutUser";
-import { getUserInfo } from "@/services/auth-services";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import Logout from "@mui/icons-material/Logout";
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Tooltip from "@mui/material/Tooltip";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
@@ -45,78 +33,15 @@ export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const router = useRouter();
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const userInfo = getUserInfo();
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleLogout = () => {
-    logoutUser(router);
-    router.push("/");
-  };
 
   return (
     <React.Fragment>
-      <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Tooltip
-          title="Account settings"
-          componentsProps={{
-            tooltip: {
-              sx: {
-                bgcolor: "#cdd1da5c",
-                color: "primary.main", // Change text color if necessary
-              },
-            },
-          }}
-        >
-          <IconButton
-            onClick={handleClick}
-            aria-controls={open ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            //   size='small'
-            sx={{
-              background: "#ffffff",
-              "& svg": {
-                color: "primary.main",
-              },
-            }}
-          >
-            <KeyboardArrowDownIcon />
-          </IconButton>
-        </Tooltip>
-      </Box>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-        slotProps={{
-          ...menuStyles,
-        }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      <Link
+        href="/dashboard/login"
+        className=" px-4 py-2 mx-auto font-Raleway text-sm rounded-md bg-orange-500 text-white"
       >
-        <Link href={`/dashboard/${userInfo?.role}/profile`}>
-          <MenuItem onClick={handleClose}>
-            <Avatar sx={{ background: "transparent", color: "primary.main" }} />
-            Profile
-          </MenuItem>
-        </Link>
-
-        <Divider />
-
-        <MenuItem onClick={handleLogout}>
-          <ListItemIcon>
-            <Logout fontSize="small" sx={{ color: "error.main" }} />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
-      </Menu>
+        Login
+      </Link>
     </React.Fragment>
   );
 }

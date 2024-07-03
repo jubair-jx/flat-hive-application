@@ -12,8 +12,7 @@ userRoutes.post(
   userControllers.createUser
 );
 userRoutes.post(
-  "/create-admin",
-  auth(UserRole.SUPER_ADMIN),
+  "/create-dashboard-admin",
   validateRequest(userValidationSchemas.createAdmin),
   userControllers.createAdmin
 );
@@ -23,23 +22,6 @@ userRoutes.get(
   "/get-all-users",
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
   userControllers.getAllUsers
-);
-userRoutes.get(
-  "/:id",
-  auth(UserRole.ADMIN, UserRole.SUPER_ADMIN, UserRole.USER),
-  userControllers.getUserById
-);
-
-//get all normal user api, modified api route
-userRoutes.get(
-  "/",
-  auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
-  userControllers.getNormalUsers
-);
-userRoutes.put(
-  "/normal-user-info/:id",
-  auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
-  userControllers.updateNormalUserData
 );
 
 export default userRoutes;

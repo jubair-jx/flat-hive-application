@@ -1,0 +1,15 @@
+.loader-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.loader-wrapper.loading .content {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.loader-wrapper.loaded .content {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
